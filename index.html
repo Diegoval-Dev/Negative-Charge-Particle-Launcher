@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Negative Charge Particle Launcher</title>
+</head>
+<body>
+    <div id="black-hole" class="hidden">
+        <p>The necessary escape velocity is greater than the speed of light, so the sphere has turned into an electrostatic black hole.</p>
+        <img src="https://static.nationalgeographic.es/files/styles/image_3200/public/agujero%20negro.png?w=1600&h=900" alt="Agujero Negro">
+    </div>
+    <div id="title-container">
+        <h1 id="title">Negative Charge Particle Launcher</h1>
+    </div>
+    <div id="main-container">
+        <div id="canva">
+            <div id="surface-canva" class="hidden"></div>
+            <div id="sphere-canva" class="hidden"></div>
+        </div>
+        <div class="control-panel">
+            <div id="max-height-information" class="hidden">
+                <p id="max-height"></p>
+            </div>
+            <div id="max-velocity-information" class="hidden">
+                <p id="max-velocity"></p>
+            </div>
+            <p>Select your surface</p>
+            <hr>
+            <form>
+                <label class="radio-container">
+                    <input type="radio" name="opcion" id="infinite-surface" value="infinite-surface"> infinite surface
+                    <span class="checkmark"></span>
+                </label>
+                <br>
+                <label class="radio-container">
+                    <input type="radio" name="opcion" id="sphere" value="sphere"> Sphere
+                    <span class="checkmark"></span>
+                </label>
+                <hr>
+                <p>Select other information</p>
+                <div id="infinite-surface-information" class="hidden">
+                    <Label>
+                        Surface charge density: <input type="number" step="any" name="charge-density" id="charge-density" min="1" max="10000000"> C/m²
+                    </Label>
+                </div>
+                <div id="sphere-information" class="hidden">
+                    <Label>
+                        Radius: <input type="number" step="any" name="radius" id="radius" min="1" max="10000000"> m
+                        <br>
+                        Electric charge: <input type="number" step="any" name="electricCharge", id="electric-charge", min="1" max="100000"> C
+                    </Label>
+                </div>
+                <div id="particle-information">
+                    <label>
+                        Particle charge: <input type="number" step="any" name="particle-charge" id="particle-charge" min="1" max="10000000"> C
+                        <br>
+                        Mass of the particle: <input type="number" step="any" name="mass-particle" id="particle-mass" min="1" max="1000000"> kg
+                        <br>
+                        Initial velocity: <input type="number" step="any" name="initial-velocity" id="initial-velocity" min="1" max="299792.458" > m/s
+                    </label>
+                </div>
+            </form>
+            <button id="main-button">Launch</button>
+        </div>
+        <div class="control-panel">
+            <p>Select a specific particle</p>
+            <div id="particle-selection">
+                <label class="radio-container">
+                    <input type="radio" name="opcionParticula" id="electron" value="electron"> Electrón
+                    <span class="checkmark"></span>
+                </label>
+                <br>
+                <label class="radio-container">
+                    <input type="radio" name="opcionParticula" id="muon" value="muon"> Muón
+                    <span class="checkmark"></span>
+                </label>
+                <br>
+                <label class="radio-container">
+                    <input type="radio" name="opcionParticula" id="positron" value="positron"> Antipartícula del electrón (positrón)
+                    <span class="checkmark"></span>
+                </label>
+                <br>
+            </div>
+        </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
