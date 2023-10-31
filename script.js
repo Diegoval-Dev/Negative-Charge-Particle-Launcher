@@ -21,6 +21,10 @@ $(document).ready(function() {
     var maxVelocityInformation = $('#max-velocity-information');
     var maxVelocityText = $('#max-velocity');
     var electron = $('#electron');
+    var muon = $('#muon');
+    var tauon = $('#tauon');
+    var negpions = $('#negpions');
+    var antiproton = $('#antiproton');
     var blackHole = $('#black-hole');
     var controlPanel = $('.control-panel')
 
@@ -112,12 +116,32 @@ $(document).ready(function() {
         var v = particleInitialVelocityInput.val();
         var maxHeight;
 
+        const charge_particle = 1.602176634e-19;
+        const mass_electron = 9.109e-31;
+        const mass_muon = 1.883e-28;
+        const mass_tauon = 3.167e-27;
+        const mass_negpion = 2.488e-28;
+        const mass_antiproton = 1.673e-27;
+
         if(v <= 299792.458){
             if(radioSphere.is(":checked")){
                 var radius = radiusInput.val()/2;
                 var umbral;
                 if(electron.is(":checked")){
                     console.log("Electron");
+                    createParticle(245,500 - (Math.log10(radius)*50+20),initialVelocity, umbral, maxHeight);
+                }if(muon.is(":checked")){
+                    console.log("Muon");
+                    createParticle(245,500 - (Math.log10(radius)*50+20),initialVelocity, umbral, maxHeight);
+                }if(tauon.is(":checked")){
+                    console.log("Tauon");
+                    createParticle(245,500 - (Math.log10(radius)*50+20),initialVelocity, umbral, maxHeight);
+                }if(negpions.is(":checked")){
+                    console.log("Negative Pions");
+                    createParticle(245,500 - (Math.log10(radius)*50+20),initialVelocity, umbral, maxHeight);
+                }if(antiproton.is(":checked")){
+                    console.log("Antiproton");
+                    createParticle(245,500 - (Math.log10(radius)*50+20),initialVelocity, umbral, maxHeight);
                 }else{
                     umbral = escapeVelocity(q,Q,mass,radius);
                     if(umbral > 299792.458){
