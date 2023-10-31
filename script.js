@@ -125,41 +125,59 @@ $(document).ready(function() {
 
         if(v <= 299792.458){
             if(radioSphere.is(":checked")){
+
                 var radius = radiusInput.val()/2;
                 var umbral;
+
                 if(electron.is(":checked")){
-                    console.log("Electron");
-                    createParticle(245,500 - (Math.log10(radius)*50+20),initialVelocity, umbral, maxHeight);
+                    mass = mass_electron;
+                    q = charge_particle;
                 }if(muon.is(":checked")){
-                    console.log("Muon");
-                    createParticle(245,500 - (Math.log10(radius)*50+20),initialVelocity, umbral, maxHeight);
+                    mass = mass_muon;
+                    q = charge_particle;
                 }if(tauon.is(":checked")){
-                    console.log("Tauon");
-                    createParticle(245,500 - (Math.log10(radius)*50+20),initialVelocity, umbral, maxHeight);
+                    mass = mass_tauon;
+                    q = charge_particle;
                 }if(negpions.is(":checked")){
-                    console.log("Negative Pions");
-                    createParticle(245,500 - (Math.log10(radius)*50+20),initialVelocity, umbral, maxHeight);
+                    mass = mass_negpion;
+                    q = charge_particle;
                 }if(antiproton.is(":checked")){
-                    console.log("Antiproton");
-                    createParticle(245,500 - (Math.log10(radius)*50+20),initialVelocity, umbral, maxHeight);
-                }else{
-                    umbral = escapeVelocity(q,Q,mass,radius);
-                    if(umbral > 299792.458){
-                        plano.css({
-                            "width": "0px",
-                            "height": "0px",
-                        });
-                        controlPanel.addClass("hidden")
-                        blackHole.removeClass("hidden");
-                        blackHole.animate({ opacity: 1 }, 1000);
-                    }else{
-                        maxHeight = maxHeightSphere(v,radius,mass,q,Q);
-                        createParticle(245,500 - (Math.log10(radius)*50+20),initialVelocity, umbral, maxHeight);
-                    }
+                    mass = mass_antiproton;
+                    q = charge_particle;
                 }
+                umbral = escapeVelocity(q,Q,mass,radius);
+                if(umbral > 299792.458){
+                    plano.css({
+                        "width": "0px",
+                        "height": "0px",
+                    });
+                    controlPanel.addClass("hidden")
+                    blackHole.removeClass("hidden");
+                    blackHole.animate({ opacity: 1 }, 1000);
+                }else{
+                    maxHeight = maxHeightSphere(v,mass,q,Q);
+                    createParticle(245,500 - (Math.log10(radius)*50+20),initialVelocity, umbral, maxHeight);
+                }
+                
                 
     
             }else if(radioInfiniteSurface.is(":checked")){
+                if(electron.is(":checked")){
+                    mass = mass_electron;
+                    q = charge_particle;
+                }if(muon.is(":checked")){
+                    mass = mass_muon;
+                    q = charge_particle;
+                }if(tauon.is(":checked")){
+                    mass = mass_tauon;
+                    q = charge_particle;
+                }if(negpions.is(":checked")){
+                    mass = mass_negpion;
+                    q = charge_particle;
+                }if(antiproton.is(":checked")){
+                    mass = mass_antiproton;
+                    q = charge_particle;
+                }
                 maxHeight = maxHeightSurface(mass,v,q,density);
                 console.log(mass,v,q,density);
                 createParticle(245,480,initialVelocity, 0, maxHeight);
@@ -168,6 +186,12 @@ $(document).ready(function() {
         }else{
             alert("The velocity must be less than the speed of light.");
         }
+
+        electron.prop("checked", false);
+        muon.prop("checked", false);
+        tauon.prop("checked", false);
+        negpions.prop("checked", false);
+        antiproton.prop("checked", false);
         
     });
 
@@ -184,7 +208,7 @@ function escapeVelocity(q, Q, mass, r){
     return escapeVelocity;
 }
 
-function maxHeightSphere(v,r,m,q,Q){
-    var maxHeight = (2*(v*v)*pi*epsilon0*(r*r))/(m*q*Q);
+function maxHeightSphere(v,m,q,Q){
+    var maxHeight = (2*q*Q)/(4*pi*epsilon0*m*v)
     return maxHeight;
 }
